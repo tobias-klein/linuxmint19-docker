@@ -1,0 +1,19 @@
+name: Build Docker image
+
+on: [ push ]
+
+jobs:
+    build-mint19-image:
+        name: Build Docker Image for Linux Mint 19
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v1
+          name: Check out
+
+        - uses: mr-smithers-excellent/docker-build-push@v3
+          name: Build & push Docker image
+          with:
+              image: toklein/linux-mint
+              registry: docker.io
+              username: ${{ secrets.DOCKER_USERNAME }}
+              password: ${{ secrets.DOCKER_PASSWORD }}
